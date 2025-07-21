@@ -10,6 +10,8 @@ class Pix extends Model
 {
     use HasFactory;
 
+    protected $table = 'pix';
+
     protected $fillable = [
         'user_id',
         'token',
