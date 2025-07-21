@@ -1,7 +1,25 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect('/home');
+    } else {
+        return redirect('/login');
+    }
 });
+
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
+
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate'])->middleware('guest');
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home')->middleware('auth');
