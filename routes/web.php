@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PixController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -12,6 +13,10 @@ Route::get('/', function () {
     }
 });
 
+Route::get('/home', function () {
+    return view('home');
+})->name('home')->middleware('auth');
+
 Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
 Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
 
@@ -20,6 +25,4 @@ Route::post('/login', [AuthController::class, 'authenticate'])->middleware('gues
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::post('/pix', [PixController::class, 'generate'])->middleware('auth');
