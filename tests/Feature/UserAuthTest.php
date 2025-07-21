@@ -19,7 +19,7 @@ class UserAuthTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertDatabaseHas('users', [
             'email' => 'lucas@example.com',
         ]);
@@ -67,7 +67,7 @@ class UserAuthTest extends TestCase
             'password' => 'password123',
         ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertAuthenticatedAs($user);
     }
 
@@ -89,13 +89,14 @@ class UserAuthTest extends TestCase
 
     public function test_a_logged_in_user_can_logout()
     {
+         /** @var \App\Models\User $user */
         $user = User::factory()->create();
 
         $this->actingAs($user);
 
         $response = $this->post('/logout');
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/login');
         $this->assertGuest();
     }
 }

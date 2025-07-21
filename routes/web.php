@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
-    if (auth()->check()) {
+    if (Auth::check()) {
         return redirect('/home');
     } else {
         return redirect('/login');
