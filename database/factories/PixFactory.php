@@ -28,29 +28,29 @@ class PixFactory extends Factory
     public function definition(): array
     {
         return [
-            'token' => (string) Str::uuid(),
-            'status' => fake()->randomElement(['generated', 'paid', 'expired']), 
-            'expires_at' => Carbon::now()->addMinutes(fake()->numberBetween(5, 60))
+            'token' => Str::uuid(),
+            'status' => 'generated',
+            'expires_at' => now()->addMinutes(10),
         ];
     }
 
     public function generated(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'status' => 'generated',
         ]);
     }
 
     public function paid(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'status' => 'paid',
         ]);
     }
 
     public function expired(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'status' => 'expired',
             'expires_at' => Carbon::now()->subMinutes(10),
         ]);
