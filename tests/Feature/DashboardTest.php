@@ -42,9 +42,9 @@ class DashboardTest extends TestCase
 
         $response = $this->get('/home');
 
-        $response->assertSee('Gerados: 3');
-        $response->assertSee('Pagos: 2');
-        $response->assertSee('Expirados: 1');
+        $response->assertSeeText('Gerados: 3');
+        $response->assertSeeText('Pagos: 2');
+        $response->assertSeeText('Expirados: 1');
     }
 
     public function test_dashboard_loads_quickly_with_many_records()
