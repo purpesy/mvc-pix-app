@@ -26,4 +26,6 @@ class PixController extends Controller
             'link' => url('/pix/' . $pix->token),
         ], 201);
     }
+
+    
 }
