@@ -27,5 +27,23 @@ class PixController extends Controller
         ], 201);
     }
 
-    
+    public function confirmPayment($token)
+    {
+        $pix = Pix::where('token', $token)->first();
+
+        if (! $pix) {
+            abort(404, 'PIX não encontrado.');
+        }
+
+        if (Carbon::now()->isAfter($pix->expires_at)) {
+            $pix->status = 'expired';
+        } else {
+            $pix->status = 'paid';
+        }
+
+        $pix->save();
+
+        return view('confirmation', ['pix' => $pix]);
+    }
+
 }

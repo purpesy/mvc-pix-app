@@ -25,4 +25,6 @@ Route::post('/login', [AuthController::class, 'authenticate'])->middleware('gues
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
+
 Route::post('/pix', [PixController::class, 'generate'])->middleware('auth');
+Route::get('/pix/{token}', [PixController::class, 'confirmPayment']);
