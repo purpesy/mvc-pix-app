@@ -9,7 +9,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
-        $generated = $user->pix()->where('status', 'generated')->count();
+        $generated = $user->pix()->count();;
         $paid = $user->pix()->where('status', 'paid')->count();
         $expired = $user->pix()->where('status', 'expired')->count();
 
