@@ -15,7 +15,7 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/home', [DashboardController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', [AuthController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
 Route::post('/register', [AuthController::class, 'store'])->middleware('guest');
@@ -26,7 +26,10 @@ Route::post('/login', [AuthController::class, 'authenticate'])->middleware('gues
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 
-Route::post('/pix', [PixController::class, 'generate'])->middleware('auth');
+Route::middleware('auth')->group(function () {
+    Route::post('/pix', [PixController::class, 'generate']);
+});
+
 Route::get('/pix/{token}', [PixController::class, 'confirmPayment']);
 
-Route::get('/home', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');

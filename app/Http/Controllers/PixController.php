@@ -45,5 +45,4 @@ class PixController extends Controller
 
         return view('confirmation', ['pix' => $pix]);
     }
-
 }
