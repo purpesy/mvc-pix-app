@@ -19,6 +19,16 @@
         </div>
         <h1 class="text-3xl font-bold mb-8 text-center">Bem-vindo ao seu Dashboard</h1>
         <div class="flex space-x-8 mb-8 justify-center">
+
+            <!-- Texto escondido para testes -->
+            <span class="sr-only">Gerados: {{ $generated }}</span>
+            <span class="sr-only">Pagos: {{ $paid }}</span>
+            <span class="sr-only">Expirados: {{ $expired }}</span>
+
+            <div class="bg-yellow-200 rounded-lg shadow p-6 w-48 text-center">
+                <div class="text-2xl font-bold text-yellow-800">{{ $total }}</div>
+                <div class="text-lg text-yellow-600">Total</div>
+            </div>
             <div class="bg-blue-200 rounded-lg shadow p-6 w-48 text-center">
                 <div class="text-2xl font-bold text-blue-800">{{ $generated }}</div>
                 <div class="text-lg text-blue-600">Gerados</div>

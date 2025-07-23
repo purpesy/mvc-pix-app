@@ -9,29 +9,30 @@ use Carbon\Carbon;
 class ExpirePix extends Command
 {
     /**
-     * The name and signature of the console command.
+     * O nome e a assinatura do comando.
      *
      * @var string
      */
     protected $signature = 'pix:expire';
 
     /**
-     * The console command description.
+     * A descrição do comando no Artisan.
      *
      * @var string
      */
-    protected $description = 'Marca todos os PIX vencidos como expired';
+    protected $description = 'Marca automaticamente como expirados todos os PIX gerados que passaram do tempo de expiração';
 
     /**
-     * Execute the console command.
+     * Executa o comando no terminal.
      */
-    public function handle()
+    public function handle(): void
     {
         $now = Carbon::now();
-        $count = Pix::where('status', 'generated')
+
+        $expiredCount = Pix::where('status', 'generated')
             ->where('expires_at', '<', $now)
             ->update(['status' => 'expired']);
 
-        $this->info("$count PIX expirados automaticamente.");
+        $this->info("{$expiredCount} PIX expirados automaticamente.");
     }
 }
