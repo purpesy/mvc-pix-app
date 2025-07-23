@@ -9,6 +9,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function index()
+    {
+        return view('home');
+    }
+    
     public function register()
     {
         return view('register');
