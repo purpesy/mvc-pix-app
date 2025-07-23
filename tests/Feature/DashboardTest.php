@@ -31,6 +31,7 @@ class DashboardTest extends TestCase
 
     public function test_dashboard_displays_correct_pix_counts()
 {
+    /** @var \App\Models\User $user */
     $user = User::factory()->create();
 
     Pix::factory()->count(3)->for($user)->create(['status' => 'generated']);
