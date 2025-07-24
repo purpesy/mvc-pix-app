@@ -127,3 +127,6 @@ xdebug.start_with_request = yes
 - Visualização do dashboard com gráficos
 
 ## Demonstração
+
+https://github.com/user-attachments/assets/d561aaaa-a3e2-484e-a06c-3f12bd7b46fd
+
